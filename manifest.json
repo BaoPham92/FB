@@ -1,0 +1,15 @@
+{
+ "manifest_version": "1",
+ "name": "FBC",
+ "description": "For FBC testing.",
+ "version": "1",
+ "author": "Bao Pham",
+    "browser_action": {
+        "default_icon": "",
+   "default_title": "Happy testing."
+    },
+"chrome_url_overrides" : {
+  "newtab": "index.html"
+    },
+ "permissions": ["activeTab"]
+}
