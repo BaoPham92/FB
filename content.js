@@ -1,21 +1,42 @@
 window.onload = () => {
     clickRoll();
     cancelModal();
+    helper.loggedClicks();
 }
 
 const helper = Object.freeze({
+
+    variables: {
+        elementType: '',
+        counter: 1
+    },
+
+    loggedClicks: () => {
+        if (clickRoll() && cancelModal()) {
+            localStorage.length !== helper.variables.counter ? helper.variables.counter = localStorage.length + 1 : console.log('error updating counter.');
+
+            localStorage.setItem('tInfo' + helper.variables.counter, 'Number of clicks recorded: ' + helper.variables.counter + ' on ' + Date(Date.now()).toString())
+
+            for (var i = 0; i < localStorage.length; i++) {
+                console.log(localStorage.getItem(localStorage.key(i)));
+            }
+        } 
+    },
+
     cLog: (element) => {
 
         switch (element) {
-            case element === timer: element === 'Timer';
+            case timer: helper.variables.elementType = 'Timer';
             break;
-            case element === freeRoll: element === 'Free Roll';
+            case freeRoll: helper.variables.elementType = 'Free Roll';
             break;
-            case element === modal: element === 'Modal';
+            case modal: helper.variables.elementType = 'Modal';
             break;
         }
 
-        element ? console.log(`${element} detected.`) : console.log(`error detecting ${element}`);
+        element ? console.log(helper.variables.elementType, 'detected.') : console.log('error detected', helper.variables.elementType, element);
+
+        helper.loggedClicks();
     }
 })
 
