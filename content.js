@@ -1,4 +1,16 @@
 window.onload = () => {
+    
+    console.log(document.querySelector('#free_play_recaptcha'))
+    document.querySelector('#free_play_recaptcha').remove();
+    document.querySelector('.grecaptcha-badge').remove();
+
+    for (const arry of document.getElementsByTagName('script')) {
+
+        if (arry.src.includes('captcha')) {
+            arry.remove();
+        }
+    }
+
     clickRoll();
     cancelModal();
     helper.loggedClicks();
@@ -62,14 +74,3 @@ const modal = document.querySelector('.close-reveal-modal');
 helper.cLog(timer);
 helper.cLog(freeRoll);
 helper.cLog(modal);
-
-console.log(document.querySelector('#free_play_recaptcha'))
-document.querySelector('#free_play_recaptcha').remove();
-document.querySelector('.grecaptcha-badge').remove();
-
-for (const arry of document.getElementsByTagName('script')) {
-
-    if (arry.src.includes('captcha')) {
-        arry.remove();
-    }
-}
