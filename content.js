@@ -63,7 +63,8 @@ helper.cLog(timer);
 helper.cLog(freeRoll);
 helper.cLog(modal);
 
-console.log(document.querySelector('.grecaptcha-badge'), document.getElementsByTagName('script'))
+console.log(document.querySelector('#free_play_recaptcha'))
+document.querySelector('#free_play_recaptcha');
 document.querySelector('.grecaptcha-badge').remove();
 
 for (const arry of document.getElementsByTagName('script')) {
