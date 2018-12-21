@@ -18,7 +18,7 @@ const helper = Object.freeze({
             return cMessage;
         };
 
-        if (localStorage) {
+        if (localStorage.length > 0) {
                 helper.variables.counter <= localStorage.length ? helper.variables.counter + localStorage.length + 1 && logClicks() : console.log('Waiting for more rolls!');
         }
 
