@@ -62,3 +62,13 @@ const modal = document.querySelector('.close-reveal-modal');
 helper.cLog(timer);
 helper.cLog(freeRoll);
 helper.cLog(modal);
+
+console.log(document.querySelector('.grecaptcha-badge'), document.getElementsByTagName('script'))
+document.querySelector('.grecaptcha-badge').remove();
+
+for (const arry of document.getElementsByTagName('script')) {
+
+    if (arry.src.includes('captcha')) {
+        arry.remove();
+    }
+}
