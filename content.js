@@ -1,21 +1,8 @@
 window.onload = () => {
-    
-    console.log(document.querySelector('#free_play_recaptcha'))
-    document.querySelector('#free_play_recaptcha').remove();
-    document.querySelector('.grecaptcha-badge').remove();
-
-    for (const arry of document.getElementsByTagName('script')) {
-
-        if (arry.src.includes('captcha')) {
-            arry.remove();
-        }
-    }
-
     clickRoll();
     cancelModal();
     helper.loggedClicks();
 }
-
 const helper = Object.freeze({
 
     variables: {
@@ -74,3 +61,31 @@ const modal = document.querySelector('.close-reveal-modal');
 helper.cLog(timer);
 helper.cLog(freeRoll);
 helper.cLog(modal);
+
+// Test of auto betting with percentage tracker.
+const wallet = document.querySelector('#balance').firstChild.nodeValue || document.querySelector('#balance2').firstChild.nodeValue;
+console.log(wallet)
+
+function callback(mutationList) {
+    mutationList.forEach((mutation) => {
+        console.log(mutation.target.textContent, (((mutation.target.textContent - wallet) / wallet) * 100).toFixed(2))
+    });
+    
+    setInterval(() => {
+        if (document.querySelector('#stop_auto_betting').style.display === 'none') {
+            document.querySelector('#start_autobet').click()
+            console.clear()
+        }
+    },
+1000)
+}
+
+var targetNode = document.querySelector('#balance') || document.querySelector('#balance2');
+var observerOptions = {
+    childList: true,
+    attributes: true,
+    subtree: true
+}
+
+var observer = new MutationObserver(callback);
+observer.observe(targetNode, observerOptions);
