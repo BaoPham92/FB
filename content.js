@@ -60,33 +60,16 @@ const modal = document.querySelector('.close-reveal-modal');
 
 
 // Below is my experiment on finding data and logic for them. Will clean clutter and organize as a todo.
-console.log(
-    document.querySelector("#bonus_span_free_points"),
-    document.querySelector("#bonus_span_free_lott"),
-    document.querySelector("#bonus_span_fp_bonus")
-)
 
-console.log(document.querySelector('.user_reward_points').textContent)
+let buttonsRP = document.getElementsByClassName('reward_link_redeem_button_style ')
+let rpBalance = document.querySelector('.user_reward_points').textContent;
 
-// Search for target buttons
-for (var i = 0; i <= document.getElementsByTagName('button').length; i++) {
-    
-    // Data
-    const 
-    attr = document.getElementsByTagName('button')[i],
-    rPoints = document.querySelector('.user_reward_points').textContent
+for(const index of buttonsRP) {
 
-    if (attr.getAttribute('onclick') === 'RedeemRPProduct(\'free_points_100\')'
-        || attr.getAttribute('onclick') === 'RedeemRPProduct(\'free_lott_100\')') {
-
-        console.log(attr, rPoints)
-        (document.querySelector("#bonus_span_free_lott") === null || document.querySelector("#bonus_span_free_points" === null)) && rPoints > 2500 ? attr.click() : console.log('could not redeem rp rewards.')
-
-    } else if (attr.getAttribute('onclick') === 'RedeemRPProduct(\'fp_bonus_1000\')') {
-        
-        console.log(attr)
-        (document.querySelector("#bonus_span_fp_bonus") === null) && (rPoints > 2500 && !rPoints < 2500) ? attr.click() : console.log('could not redeem 3rd reward.')
-    }
+    (index.getAttribute('onclick').includes('RedeemRPProduct(\'free_points_100\')') && !(document.querySelector("#bonus_span_free_points"))) && rpBalance > 2500 ? index.click() 
+    : (index.getAttribute('onclick').includes('RedeemRPProduct(\'free_lott_100\')') && !(document.querySelector("#bonus_span_free_lott"))) && rpBalance > 2500 ? index.click() 
+    : (index.getAttribute('onclick').includes('RedeemRPProduct(\'fp_bonus_1000\')') && !(document.querySelector("#bonus_span_fp_bonus"))) && rpBalance > 7000 ? index.click()
+    : console.log('error')
 }
 
 helper.cLog(timer);
@@ -104,7 +87,7 @@ function callback(mutationList) {
 }
 
 var targetNode = document.querySelector('#balance') || document.querySelector('#balance2'),
-    targetNode2 = document.querySelector("#bonus_span_free_points") && document.querySelector("#bonus_span_free_lott") && document.querySelector("#bonus_span_fp_bonus")
+    targetNode2 = document.querySelector("#bonus_span_free_points") || document.querySelector("#bonus_span_free_lott") || document.querySelector("#bonus_span_fp_bonus")
 var observerOptions = {
     childList: true,
     attributes: true,
