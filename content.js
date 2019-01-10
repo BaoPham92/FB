@@ -36,6 +36,10 @@ for (const index of buttonsRP) {
     if (match) {
         index.click()
     }
+
+    if (!index.click()) {
+        console.log('Rewards / Lotto - (100 Points) Claim attempt unsuccessful Or unavailable.')
+    }
 }
 
 // Test of auto betting with percentage tracker.
@@ -44,7 +48,7 @@ console.log(wallet)
 
 function callback(mutationList) {
     mutationList.forEach((mutation) => {
-        console.log(mutation.target.textContent, (((mutation.target.textContent - wallet) / wallet) * 100).toFixed(2))
+        console.log(`St${mutation.target.textContent}`, (((mutation.target.textContent - wallet) / wallet) * 100).toFixed(2) + `% Since original amount of ${wallet}`)
     });
 }
 
