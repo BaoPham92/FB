@@ -5,11 +5,6 @@ window.onload = () => {
 }
 const helper = Object.freeze({
 
-    variables: {
-        elementType: '',
-        counter: 0
-    },
-
     loggedClicks: () => {
 
         const logClicks = () => {
@@ -54,27 +49,31 @@ const cancelModal = () => {
     modal ? modal.click() : console.log('Error attempting cancel modal.')
 }
 
-const timer = document.querySelector('#time_remaining');
-const freeRoll = document.getElementById('free_play_form_button');
-const modal = document.querySelector('.close-reveal-modal');
+const timer = document.querySelector('#time_remaining')
+const freeRoll = document.getElementById('free_play_form_button')
+const modal = document.querySelector('.close-reveal-modal')
 
+helper.cLog(timer)
+helper.cLog(freeRoll)
+helper.cLog(modal)
 
 // Below is my experiment on finding data and logic for them. Will clean clutter and organize as a todo.
 
 let buttonsRP = document.getElementsByClassName('reward_link_redeem_button_style ')
 let rpBalance = document.querySelector('.user_reward_points').textContent;
 
-for(const index of buttonsRP) {
+for (const index of buttonsRP) {
+    const targets = [
+        'RedeemRPProduct(\'free_lott_100\')',
+        'RedeemRPProduct(\'free_points_100\')']
 
-    (index.getAttribute('onclick').includes('RedeemRPProduct(\'free_points_100\')') && !(document.querySelector("#bonus_span_free_points"))) && rpBalance > 2500 ? index.click() 
-    : (index.getAttribute('onclick').includes('RedeemRPProduct(\'free_lott_100\')') && !(document.querySelector("#bonus_span_free_lott"))) && rpBalance > 2500 ? index.click() 
-    : (index.getAttribute('onclick').includes('RedeemRPProduct(\'fp_bonus_1000\')') && !(document.querySelector("#bonus_span_fp_bonus"))) && rpBalance > 7000 ? index.click()
-    : console.log('error')
+    const match = targets.map(t => index.getAttribute('onclick').toLocaleLowerCase().includes((t).toLocaleLowerCase()))
+    // console.log(match)
+
+    if (match) {
+        index.click()
+    }
 }
-
-helper.cLog(timer);
-helper.cLog(freeRoll);
-helper.cLog(modal);
 
 // Test of auto betting with percentage tracker.
 const wallet = document.querySelector('#balance').firstChild.nodeValue || document.querySelector('#balance2').firstChild.nodeValue;
@@ -95,4 +94,4 @@ var observerOptions = {
 }
 
 var observer = new MutationObserver(callback);
-observer.observe(targetNode2, observerOptions);
+observer.observe(targetNode, observerOptions);
