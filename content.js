@@ -30,16 +30,16 @@ for (const index of buttonsRP) {
         'RedeemRPProduct(\'free_lott_100\')',
         'RedeemRPProduct(\'free_points_100\')']
 
-    const match = targets.map(t => index.getAttribute('onclick').toLocaleLowerCase().includes((t).toLocaleLowerCase()))
-    // console.log(match)
+    const match = targets.filter(t => {
+        
+        if (index.getAttribute('onclick').toLocaleLowerCase().includes((t).toLocaleLowerCase())) {
+            return index.click()
+        }
 
-    if (match) {
-        index.click()
-    }
-
-    if (!index.click()) {
-        console.log('Rewards / Lotto - (100 Points) Claim attempt unsuccessful Or unavailable.')
-    }
+        if (!index.click()) {
+            return console.log('Rewards / Lotto - (100 Points) Claim attempt unsuccessful Or unavailable.')
+        }
+    })
 }
 
 // Test of auto betting with percentage tracker.
@@ -48,7 +48,7 @@ console.log(wallet)
 
 function callback(mutationList) {
     mutationList.forEach((mutation) => {
-        console.log(`Current amount of ${mutation.target.textContent}`, (((mutation.target.textContent - wallet) / wallet) * 100).toFixed(2) + `% Since original amount of ${wallet}`)
+        console.log(`Current wallet amount of: ${mutation.target.textContent}, ` (((mutation.target.textContent - wallet) / wallet) * 100).toFixed(2) `% Gained since original amount of ${wallet}.`)
     });
 }
 
