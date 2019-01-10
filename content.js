@@ -48,7 +48,7 @@ console.log(wallet)
 
 function callback(mutationList) {
     mutationList.forEach((mutation) => {
-        console.log(`St${mutation.target.textContent}`, (((mutation.target.textContent - wallet) / wallet) * 100).toFixed(2) + `% Since original amount of ${wallet}`)
+        console.log(`Current amount of ${mutation.target.textContent}`, (((mutation.target.textContent - wallet) / wallet) * 100).toFixed(2) + `% Since original amount of ${wallet}`)
     });
 }
 
