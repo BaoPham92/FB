@@ -1,40 +1,7 @@
 window.onload = () => {
     clickRoll();
     cancelModal();
-    helper.loggedClicks();
 }
-const helper = Object.freeze({
-
-    loggedClicks: () => {
-
-        const logClicks = () => {
-            const cMessage = localStorage.setItem('tInfo' + helper.variables.counter, 'Number of clicks recorded: ' + helper.variables.counter + ' on ' + Date(Date.now()).toString());
-            return cMessage;
-        };
-
-        if (localStorage.length > 0) {
-            helper.variables.counter <= localStorage.length ? helper.variables.counter + localStorage.length + 1 && logClicks() : console.log('Waiting for more rolls!');
-        }
-
-        for (var i = 0; i < localStorage.length; i++) {
-            console.log(localStorage.getItem(localStorage.key(i)));
-        }
-    },
-
-    cLog: (element) => {
-
-        switch (element) {
-            case timer: helper.variables.elementType = 'Timer';
-                break;
-            case freeRoll: helper.variables.elementType = 'Free Roll';
-                break;
-            case modal: helper.variables.elementType = 'Modal';
-                break;
-        }
-
-        element ? console.log(helper.variables.elementType, 'detected.') : console.log('error detected', helper.variables.elementType, element);
-    }
-})
 
 const clickRoll = () => {
     if (freeRoll && freeRoll.style.display === 'none') {
@@ -52,10 +19,6 @@ const cancelModal = () => {
 const timer = document.querySelector('#time_remaining')
 const freeRoll = document.getElementById('free_play_form_button')
 const modal = document.querySelector('.close-reveal-modal')
-
-helper.cLog(timer)
-helper.cLog(freeRoll)
-helper.cLog(modal)
 
 // Below is my experiment on finding data and logic for them. Will clean clutter and organize as a todo.
 
