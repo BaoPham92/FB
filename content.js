@@ -26,22 +26,27 @@ let buttonsRP = document.getElementsByClassName('reward_link_redeem_button_style
 let rpBalance = document.querySelector('.user_reward_points').textContent;
 
 const targets = [
-    'RedeemRPProduct(\'free_lott_100\')',
-    'RedeemRPProduct(\'free_points_100\')']
+`RedeemRPProduct('free_lott_100')`,
+`RedeemRPProduct('free_points_100')`]
 
 targets.forEach(t => {
     const checker = Array.from(buttonsRP).find(index => {
-        if (index.getAttribute('onclick').toLocaleLowerCase().includes((t).toLocaleLowerCase())) {
+        if (index.getAttribute('onclick').toLocaleLowerCase().includes((t).toLocaleLowerCase()) === true) {
+            index.removeAttribute('disabled')
+            return index.click()
+        } else if (index.getAttribute('onclick').toLocaleLowerCase().includes((`RedeemRPProduct('fp_bonus_1000')`).toLocaleLowerCase()) === true && rpBalance > 6000) {
+            index.removeAttribute('disabled')
             return index.click()
         }
     })
 
-    // console.log(checker)
+    console.log(checker)
     if (checker === undefined) {
         console.log('Already have bonuses')
     } else {
         console.log('Claimed!')
     }
+    return checker
 })
 
 // Test of auto betting with percentage tracker.
@@ -50,7 +55,8 @@ const wallet = document.querySelector('#balance').firstChild.nodeValue || docume
 
 function callback(mutationList) {
     mutationList.forEach((mutation) => {
-        console.log(`Current wallet amount of: ` + mutation.target.textContent, (((mutation.target.textContent - wallet) / wallet) * 100).toFixed(2) + `% Gained from ${wallet}.`)
+        console.log(`Current BTC: ` + mutation.target.textContent)
+        console.log((((mutation.target.textContent - wallet) / wallet) * 100).toFixed(2) + `% Gained from ${wallet}.`)
     })
 }
 
