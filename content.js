@@ -34,7 +34,7 @@ targets.forEach(t => {
         if (index.getAttribute('onclick').toLocaleLowerCase().includes((t).toLocaleLowerCase()) === true) {
             index.removeAttribute('disabled')
             return index.click()
-        } else if (index.getAttribute('onclick').toLocaleLowerCase().includes((`RedeemRPProduct('fp_bonus_1000')`).toLocaleLowerCase()) === true && rpBalance > 6000) {
+        } else if (index.getAttribute('onclick').toLocaleLowerCase().includes((`RedeemRPProduct('fp_bonus_1000')`).toLocaleLowerCase()) === true && parseFloat(rpBalance.replace(/,/g, '')) > 6000) {
             index.removeAttribute('disabled')
             return index.click()
         }
