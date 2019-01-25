@@ -26,7 +26,6 @@ let buttonsRP = document.getElementsByClassName('reward_link_redeem_button_style
 let rpBalance = document.querySelector('.user_reward_points').textContent;
 
 const targets = [
-`RedeemRPProduct('free_lott_100')`,
 `RedeemRPProduct('free_points_100')`]
 
 targets.forEach(t => {
@@ -40,7 +39,7 @@ targets.forEach(t => {
         }
     })
 
-    console.log(checker)
+    // console.log(checker)
     if (checker === undefined) {
         console.log('Already have bonuses')
     } else {
